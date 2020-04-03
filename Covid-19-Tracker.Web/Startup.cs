@@ -1,6 +1,7 @@
 using Covid_19_Tracker.Persistence;
 using Covid_19_Tracker.Persistence.Repositories;
 using Covid_19_Tracker.Persistence.Repositories.interfaces;
+using Covid_19_Tracker.Persistence.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -41,7 +42,8 @@ namespace Covid_19_Tracker.Web
                      .Build();
                 config.DefaultPolicy = policy;
             });
-            services.AddScoped<IEntityRepository, EntityRepository>();
+            services.AddScoped<ICasPositifRepository, CasPositifRepository>();
+            services.AddScoped<ICasSuiviRepository, CasSuiviRepository>();
             services.AddControllersWithViews();
         }
 

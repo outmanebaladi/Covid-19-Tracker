@@ -1,6 +1,6 @@
 ﻿namespace Covid_19_Tracker.Entites
 {
-    public class Personne
+    public class Personne : IEntity
     {
         public int Id { get; set; }
         public string Nom { get; set; }

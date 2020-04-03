@@ -4,22 +4,27 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Covid_19_Tracker.Entites;
 using Covid_19_Tracker.Persistence;
+using Covid_19_Tracker.Persistence.Repositories.Interfaces;
+using Covid_19_Tracker.Web.Mappers;
+using Covid_19_Tracker.Web.Models;
 
 namespace Covid_19_Tracker.Web.Controllers
 {
     public class CasSuivisController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly ICasSuiviRepository _casSuiviRepository;
 
-        public CasSuivisController(AppDbContext context)
+        public CasSuivisController(ICasSuiviRepository casSuiviRepository)
         {
-            _context = context;
+            _casSuiviRepository = casSuiviRepository;
         }
 
         // GET: CasSuivis
         public async Task<IActionResult> Index()
         {
-            return View(await _context.CasSuivis.ToListAsync());
+            var casSuivis = await _casSuiviRepository.GetAll();
+            var models = casSuivis.ToCasSuiviViewModel();
+            return View(models);
         }
 
         // GET: CasSuivis/Details/5
@@ -30,14 +35,14 @@ namespace Covid_19_Tracker.Web.Controllers
                 return NotFound();
             }
 
-            var casSuivi = await _context.CasSuivis
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var casSuivi = await _casSuiviRepository.Get(id.Value);
             if (casSuivi == null)
             {
                 return NotFound();
             }
 
-            return View(casSuivi);
+            var model = casSuivi.ToCasSuiviViewModel();
+            return View(model);
         }
 
         // GET: CasSuivis/Create
@@ -51,15 +56,15 @@ namespace Covid_19_Tracker.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Lien,DateDernierCreation,NiveauRisque,DateFin,NombreJours,Actif,Id,Nom,Prenom,CIN,Sexe,NumeroTel")] CasSuivi casSuivi)
+        public async Task<IActionResult> Create(CasSuiviViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(casSuivi);
-                await _context.SaveChangesAsync();
+                var casSuivi = model.ToCasSuiviEntity();
+                await _casSuiviRepository.Add(casSuivi);
                 return RedirectToAction(nameof(Index));
             }
-            return View(casSuivi);
+            return View(model);
         }
 
         // GET: CasSuivis/Edit/5
@@ -70,12 +75,13 @@ namespace Covid_19_Tracker.Web.Controllers
                 return NotFound();
             }
 
-            var casSuivi = await _context.CasSuivis.FindAsync(id);
+            var casSuivi = await _casSuiviRepository.Get(id.Value);
             if (casSuivi == null)
             {
                 return NotFound();
             }
-            return View(casSuivi);
+            var model = casSuivi.ToCasSuiviViewModel();
+            return View(model);
         }
 
         // POST: CasSuivis/Edit/5
@@ -83,23 +89,18 @@ namespace Covid_19_Tracker.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Lien,DateDernierCreation,NiveauRisque,DateFin,NombreJours,Actif,Id,Nom,Prenom,CIN,Sexe,NumeroTel")] CasSuivi casSuivi)
+        public async Task<IActionResult> Edit(int id, CasSuiviViewModel model)
         {
-            if (id != casSuivi.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(casSuivi);
-                    await _context.SaveChangesAsync();
+                    var casSuivi = model.ToCasSuiviEntity();
+                    await _casSuiviRepository.Update(casSuivi);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CasSuiviExists(casSuivi.Id))
+                    if (!await _casSuiviRepository.Any(id))
                     {
                         return NotFound();
                     }
@@ -110,7 +111,7 @@ namespace Covid_19_Tracker.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(casSuivi);
+            return View(model);
         }
 
         // GET: CasSuivis/Delete/5
@@ -121,14 +122,14 @@ namespace Covid_19_Tracker.Web.Controllers
                 return NotFound();
             }
 
-            var casSuivi = await _context.CasSuivis
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var casSuivi = await _casSuiviRepository.Get(id.Value);
             if (casSuivi == null)
             {
                 return NotFound();
             }
 
-            return View(casSuivi);
+            var model = casSuivi.ToCasSuiviViewModel();
+            return View(model);
         }
 
         // POST: CasSuivis/Delete/5
@@ -136,15 +137,8 @@ namespace Covid_19_Tracker.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var casSuivi = await _context.CasSuivis.FindAsync(id);
-            _context.CasSuivis.Remove(casSuivi);
-            await _context.SaveChangesAsync();
+            var casSuivi = await _casSuiviRepository.Delete(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool CasSuiviExists(int id)
-        {
-            return _context.CasSuivis.Any(e => e.Id == id);
         }
     }
 }

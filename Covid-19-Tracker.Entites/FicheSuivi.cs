@@ -1,7 +1,6 @@
-﻿using System;
-namespace Covid_19_Tracker.Entites
+﻿namespace Covid_19_Tracker.Entites
 {
-    public class FicheSuivi
+    public class FicheSuivi : IEntity
     {
         public int Id { get; set; }
         public int Temp_M { get; set; }
