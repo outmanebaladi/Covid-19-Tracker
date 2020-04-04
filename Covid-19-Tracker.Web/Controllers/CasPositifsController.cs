@@ -4,12 +4,17 @@ using Microsoft.EntityFrameworkCore;
 using Covid_19_Tracker.Persistence.Repositories.Interfaces;
 using Covid_19_Tracker.Web.Models;
 using Covid_19_Tracker.Web.Mappers;
+using Covid_19_Tracker.Web.Mappers.ExcelExport;
+using System.Collections.Immutable;
+using OfficeOpenXml;
 
 namespace Covid_19_Tracker.Web.Controllers
 {
     public class CasPositifsController : Controller
     {
         private readonly ICasPositifRepository _casPositifRepository;
+        private readonly ICasSuiviRepository _casSuiviRepository;
+        private const string ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
         public CasPositifsController(ICasPositifRepository casPositifRepository)
         {
@@ -136,6 +141,34 @@ namespace Covid_19_Tracker.Web.Controllers
         {
             var casPositif = await _casPositifRepository.Delete(id);
             return RedirectToAction(nameof(Index));
+        }
+        [HttpGet]
+        public async Task<IActionResult> ExporterFichesDeSuiviEnExcel(int? id)
+        {
+            var casPositif = await _casPositifRepository.Get(id.Value);
+            var nomDeFichier = $"{casPositif.Nom}{casPositif.Prenom}.xlsx";
+            var fichierVide = File(default(byte[]), ContentType, nomDeFichier);
+            var casSuivis = await _casPositifRepository.GetCasSuivis(id.Value);
+            if (casSuivis == null)
+            {
+                return fichierVide;
+            }
+            using (var excelPackage = new ExcelPackage())
+            {
+                foreach (var casSuivi in casSuivis)
+                {
+                    var fichesDeSuivi = await _casSuiviRepository.GetFichesSuivi(casSuivi.Id);
+                    var builder = ImmutableList.CreateBuilder<ExcelSuivi>();
+                    foreach (var ficheDeSuivi in fichesDeSuivi)
+                    {
+                        ExcelSuivi suivi = EntitiesExtensions.ToExcelSuivi(ficheDeSuivi);
+                        builder.Add(suivi);
+                    }
+                    var excelSuivis = builder.ToImmutable();
+                    excelPackage.AjouterSuivi(excelSuivis);
+                }
+                return File(excelPackage.GetAsByteArray(), ContentType, nomDeFichier);
+            }
         }
     }
 }
