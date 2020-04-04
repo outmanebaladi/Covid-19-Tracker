@@ -22,6 +22,6 @@ namespace Covid_19_Tracker.Entites
         public string Autres_S { get; set; }
         public string Conclusion_M { get; set; }
         public string Conclusion_S { get; set; }
-        public CasSuivi casSuivi { get; set; }
+        public CasSuivi CasSuivi { get; set; }
     }
 }
