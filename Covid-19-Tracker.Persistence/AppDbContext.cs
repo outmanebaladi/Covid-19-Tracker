@@ -17,23 +17,6 @@ namespace Covid_19_Tracker.Persistence
         public DbSet<CasSuivi> CasSuivis { get; set; }
         public DbSet<FicheSuivi> FichesSuivi { get; set; }
         public DbSet<Personne> Personnes { get; set; }
-        public DbSet<Region> Regions { get; set; }
-        public DbSet<City> Cities { get; set; }
-
-    
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            builder.Entity<Region>().HasData(new Region { 
-                Name = "",
-                Cities = new List<City>
-                {
-                    new City
-                    {
-                         
-                    }
-                }
-            });
-        }
 
     }
 }

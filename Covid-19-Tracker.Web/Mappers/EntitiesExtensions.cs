@@ -33,6 +33,14 @@ namespace Covid_19_Tracker.Web.Mappers
 			};
 		}
 
+		public static FicheSuiviViewModel ToFicheSuiviViewModel(this FicheSuivi ficheSuivi)
+		{
+			return new FicheSuiviViewModel
+			{
+				
+			};
+		}
+
 		public static IEnumerable<CasPositifViewModel> ToCasPositifViewModel(this List<CasPositif> casPositifs)
 		{
 			var models = new List<CasPositifViewModel>();
@@ -49,6 +57,16 @@ namespace Covid_19_Tracker.Web.Mappers
 			foreach (var casSuivi in casSuivis)
 			{
 				models.Add(casSuivi.ToCasSuiviViewModel());
+			}
+			return models;
+		}
+
+		public static IEnumerable<FicheSuiviViewModel> ToFicheSuiviViewModel(this List<FicheSuivi> fichesSuivi)
+		{
+			var models = new List<FicheSuiviViewModel>();
+			foreach (var ficheSuivi in fichesSuivi)
+			{
+				models.Add(ficheSuivi.ToFicheSuiviViewModel());
 			}
 			return models;
 		}

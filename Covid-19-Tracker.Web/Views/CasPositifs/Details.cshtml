@@ -1,70 +1,117 @@
 ﻿@model IEnumerable<CasSuiviViewModel>
 
 @{
-    ViewData["Title"] = "Details";
+	ViewData["Title"] = "Details";
 }
 
-<h1>Cas Suivis:</h1>
+<h1>Cas Suivis </h1>
 
+<p>
+	<a asp-controller="CasSuivis" asp-action="Create">Nouveau cas suivi</a>
+</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Nom)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Prenom)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.CIN)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Sexe)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Region)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.CodePostal)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Addresse)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.NumeroTel)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Lien)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.DateDernierCreation)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.NiveauRisque)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.DateFin)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.NombreJours)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Actif)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Nom)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Prenom)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.CIN)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Sexe)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Region)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.CodePostal)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Addresse)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.NumeroTel)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Lien)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.DateDernierCreation)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.NiveauRisque)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.DateFin)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.DateFin)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Actif)
+			</td>
+			<td>
+				<a asp-controller="CasSuivis" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+				<a asp-controller="CasSuivis" asp-action="Details" asp-route-id="@item.Id">Delete</a>
+				<a asp-controller="CasSuivis" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+			</td>
+		</tr>
+		}
+	</tbody>
+</table>
 <div>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Type)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Type)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Date_Declaration)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Date_Declaration)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Date_Dernier_Contact)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Date_Dernier_Contact)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre_Contacts)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Nombre_Contacts)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Nom)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Nom)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Prenom)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Prenom)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CIN)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CIN)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Sexe)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Sexe)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.NumeroTel)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NumeroTel)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+	<a asp-action="Index">Back</a>
 </div>

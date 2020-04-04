@@ -1,84 +1,130 @@
-﻿@model Covid_19_Tracker.Entites.CasSuivi
+﻿@model IEnumerable<FicheSuiviViewModel>
 
 @{
-    ViewData["Title"] = "Details";
+	ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>les fiches de suivis:</h1>
 
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Date)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Temp_M)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Temp_S)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Toux_M)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Toux_S)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Dyspnee_M)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Dyspnee_S)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.MalDeGorge_M)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.MalDeGorge_S)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Cephalee_M)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Cephalee_S)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Myalgie_M)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Myalgie_S)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Autres_M)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Autres_S)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Conclusion_M)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Conclusion_S)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Date)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Temp_M)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Temp_S)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Toux_M)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Toux_S)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Dyspnee_M)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Dyspnee_S)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.MalDeGorge_M)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.MalDeGorge_S)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Cephalee_M)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Cephalee_S)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Myalgie_M)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Myalgie_S)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Autres_M)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Autres_S)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Conclusion_M)
+			</td>
+			<td>
+				<a asp-controller="FicheSuivi" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+				<a asp-controller="FicheSuivi" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+			</td>
+		</tr>
+		}
+	</tbody>
+</table>
 <div>
-    <h4>CasSuivi</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Lien)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Lien)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateDernierCreation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateDernierCreation)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NiveauRisque)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NiveauRisque)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateFin)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateFin)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NombreJours)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NombreJours)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Actif)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Actif)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nom)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nom)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Prenom)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Prenom)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CIN)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CIN)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Sexe)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Sexe)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumeroTel)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumeroTel)
-        </dd>
-    </dl>
+	<a asp-action="Index">Back</a>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+

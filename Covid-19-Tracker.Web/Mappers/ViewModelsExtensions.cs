@@ -34,6 +34,14 @@ namespace Covid_19_Tracker.Web.Mappers
 				NumeroTel = casSuiviViewModel.NumeroTel,
 			};
 		}
+
+		public static FicheSuivi ToFicheSuiviEntity(this FicheSuiviViewModel ficheSuiviViewModel)
+		{
+			return new FicheSuivi
+			{
+				
+			};
+		}
 		private static T ToEnum<T>(this string str) where T : struct
 		{
 			Enum.TryParse(str, out T result);

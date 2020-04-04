@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Covid_19_Tracker.Entites
+namespace Covid_19_Tracker.Web.Models
 {
-    public class FicheSuivi : IEntity
-    {
+	public class FicheSuiviViewModel
+	{
         public int Id { get; set; }
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
         public int Temp_M { get; set; }
         public int Temp_S { get; set; }
         public bool Toux_M { get; set; }
@@ -22,6 +25,5 @@ namespace Covid_19_Tracker.Entites
         public string Autres_S { get; set; }
         public string Conclusion_M { get; set; }
         public string Conclusion_S { get; set; }
-        public CasSuivi casSuivi { get; set; }
     }
 }

@@ -1,6 +1,5 @@
 using Covid_19_Tracker.Persistence;
 using Covid_19_Tracker.Persistence.Repositories;
-using Covid_19_Tracker.Persistence.Repositories.interfaces;
 using Covid_19_Tracker.Persistence.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;

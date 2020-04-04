@@ -22,24 +22,6 @@ namespace Covid_19_Tracker.Web.Controllers
             return View(await _context.FichesSuivi.ToListAsync());
         }
 
-        // GET: FicheSuivis/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var ficheSuivi = await _context.FichesSuivi
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (ficheSuivi == null)
-            {
-                return NotFound();
-            }
-
-            return View(ficheSuivi);
-        }
-
         // GET: FicheSuivis/Create
         public IActionResult Create()
         {

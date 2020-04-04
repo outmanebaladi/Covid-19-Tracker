@@ -11,10 +11,10 @@ namespace Covid_19_Tracker.Persistence.Migrations
                 name: "Addresses",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    Ville = table.Column<string>(nullable: true),
-                    Region = table.Column<string>(nullable: true),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Codepostal = table.Column<int>(nullable: false),
+                    Region = table.Column<int>(nullable: false),
                     Address_1 = table.Column<string>(nullable: true),
                     Address_2 = table.Column<string>(nullable: true)
                 },
@@ -34,7 +34,7 @@ namespace Covid_19_Tracker.Persistence.Migrations
                     CIN = table.Column<string>(nullable: true),
                     Sexe = table.Column<int>(nullable: false),
                     NumeroTel = table.Column<string>(nullable: true),
-                    AddresseId = table.Column<string>(nullable: true),
+                    AddresseId = table.Column<int>(nullable: true),
                     Discriminator = table.Column<string>(nullable: false),
                     Type = table.Column<int>(nullable: true),
                     Date_Declaration = table.Column<DateTime>(nullable: true),
@@ -71,10 +71,23 @@ namespace Covid_19_Tracker.Persistence.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Date = table.Column<DateTime>(nullable: false),
                     Temp_M = table.Column<int>(nullable: false),
                     Temp_S = table.Column<int>(nullable: false),
                     Toux_M = table.Column<bool>(nullable: false),
                     Toux_S = table.Column<bool>(nullable: false),
+                    MalDeGorge_M = table.Column<bool>(nullable: false),
+                    MalDeGorge_S = table.Column<bool>(nullable: false),
+                    Cephalee_M = table.Column<bool>(nullable: false),
+                    Cephalee_S = table.Column<bool>(nullable: false),
+                    Dyspnee_M = table.Column<bool>(nullable: false),
+                    Dyspnee_S = table.Column<bool>(nullable: false),
+                    Myalgie_M = table.Column<bool>(nullable: false),
+                    Myalgie_S = table.Column<bool>(nullable: false),
+                    Autres_M = table.Column<string>(nullable: true),
+                    Autres_S = table.Column<string>(nullable: true),
+                    Conclusion_M = table.Column<string>(nullable: true),
+                    Conclusion_S = table.Column<string>(nullable: true),
                     casSuiviId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>

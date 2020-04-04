@@ -1,13 +1,16 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Covid-19-Tracker.Web", "Covid-19-Tracker.Web\Covid-19-Tracker.Web.csproj", "{80B2BB76-22C0-4992-AA6E-750F0C2A8AC8}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29926.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Covid-19-Tracker.Web", "Covid-19-Tracker.Web\Covid-19-Tracker.Web.csproj", "{80B2BB76-22C0-4992-AA6E-750F0C2A8AC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Covid-19-Tracker.Persistence", "Covid-19-Tracker.Persistence\Covid-19-Tracker.Persistence.csproj", "{FF2E0731-9EC9-4A6C-8346-054E763ACC49}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Covid-19-Tracker.Persistence", "Covid-19-Tracker.Persistence\Covid-19-Tracker.Persistence.csproj", "{FF2E0731-9EC9-4A6C-8346-054E763ACC49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Covid-19-Tracker.Entites", "Covid-19-Tracker.Entites\Covid-19-Tracker.Entites.csproj", "{2FF81DA2-CACC-41F5-89F0-7B0793A3AAF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Covid-19-Tracker.Entites", "Covid-19-Tracker.Entites\Covid-19-Tracker.Entites.csproj", "{2FF81DA2-CACC-41F5-89F0-7B0793A3AAF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Covid-19-Tracker.Tests", "Covid-19-Tracker.Tests\Covid-19-Tracker.Tests.csproj", "{0137FCEC-6F78-4F19-BEEA-B731D7522A08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Covid-19-Tracker.Tests", "Covid-19-Tracker.Tests\Covid-19-Tracker.Tests.csproj", "{0137FCEC-6F78-4F19-BEEA-B731D7522A08}"
+EndProject
+Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "ARG", "ARG\ARG.deployproj", "{383F1BB2-93EA-4159-A68D-DB879B78822E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,5 +34,15 @@ Global
 		{0137FCEC-6F78-4F19-BEEA-B731D7522A08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0137FCEC-6F78-4F19-BEEA-B731D7522A08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0137FCEC-6F78-4F19-BEEA-B731D7522A08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{383F1BB2-93EA-4159-A68D-DB879B78822E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{383F1BB2-93EA-4159-A68D-DB879B78822E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{383F1BB2-93EA-4159-A68D-DB879B78822E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{383F1BB2-93EA-4159-A68D-DB879B78822E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C6D63DC5-E373-4571-9F37-AF936FA9B548}
 	EndGlobalSection
 EndGlobal
