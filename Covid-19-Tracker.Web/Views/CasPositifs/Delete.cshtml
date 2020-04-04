@@ -1,4 +1,4 @@
-﻿@model Covid_19_Tracker.Entites.CasPositif
+﻿@model CasPositifViewModel
 
 @{
     ViewData["Title"] = "Delete";
@@ -11,30 +11,6 @@
     <h4>CasPositif</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Type)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Type)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Date_Declaration)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Date_Declaration)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Date_Dernier_Contact)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Date_Dernier_Contact)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre_Contacts)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre_Contacts)
-        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Nom)
         </dt>
@@ -53,18 +29,7 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CIN)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Sexe)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Sexe)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumeroTel)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumeroTel)
-        </dd>
+       
     </dl>
     
     <form asp-action="Delete">

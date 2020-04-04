@@ -1,25 +1,27 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Covid_19_Tracker.Entites;
-using Covid_19_Tracker.Persistence;
+using Covid_19_Tracker.Persistence.Repositories.Interfaces;
+using Covid_19_Tracker.Web.Models;
+using Covid_19_Tracker.Web.Mappers;
 
 namespace Covid_19_Tracker.Web.Controllers
 {
     public class CasPositifsController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly ICasPositifRepository _casPositifRepository;
 
-        public CasPositifsController(AppDbContext context)
+        public CasPositifsController(ICasPositifRepository casPositifRepository)
         {
-            _context = context;
+            _casPositifRepository = casPositifRepository;
         }
 
         // GET: CasPositifs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.CasPositifs.ToListAsync());
+            var casPositifs = await _casPositifRepository.GetAll();
+            var models = casPositifs.ToCasPositifViewModel();
+            return View(models);
         }
 
         // GET: CasPositifs/Details/5
@@ -30,14 +32,14 @@ namespace Covid_19_Tracker.Web.Controllers
                 return NotFound();
             }
 
-            var casPositif = await _context.CasPositifs
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (casPositif == null)
+            var casSuivis = await _casPositifRepository.GetCasSuivis(id.Value); ;
+            if (casSuivis == null)
             {
                 return NotFound();
             }
 
-            return View(casPositif);
+            var model = casSuivis.ToCasSuiviViewModel();
+            return View(model);
         }
 
         // GET: CasPositifs/Create
@@ -51,15 +53,15 @@ namespace Covid_19_Tracker.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Type,Date_Declaration,Date_Dernier_Contact,Nombre_Contacts,Id,Nom,Prenom,CIN,Sexe,NumeroTel")] CasPositif casPositif)
+        public async Task<IActionResult> Create(CasPositifViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(casPositif);
-                await _context.SaveChangesAsync();
+                var casPositif = model.ToCasPositifEntity();
+                await _casPositifRepository.Add(casPositif);
                 return RedirectToAction(nameof(Index));
             }
-            return View(casPositif);
+            return View(model);
         }
 
         // GET: CasPositifs/Edit/5
@@ -70,12 +72,13 @@ namespace Covid_19_Tracker.Web.Controllers
                 return NotFound();
             }
 
-            var casPositif = await _context.CasPositifs.FindAsync(id);
+            var casPositif = await _casPositifRepository.Get(id.Value);
             if (casPositif == null)
             {
                 return NotFound();
             }
-            return View(casPositif);
+            var model = casPositif.ToCasPositifViewModel();
+            return View(model);
         }
 
         // POST: CasPositifs/Edit/5
@@ -83,23 +86,18 @@ namespace Covid_19_Tracker.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Type,Date_Declaration,Date_Dernier_Contact,Nombre_Contacts,Id,Nom,Prenom,CIN,Sexe,NumeroTel")] CasPositif casPositif)
+        public async Task<IActionResult> Edit(int id, CasPositifViewModel model)
         {
-            if (id != casPositif.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(casPositif);
-                    await _context.SaveChangesAsync();
+                    var casPositif = model.ToCasPositifEntity();
+                    await _casPositifRepository.Update(casPositif);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CasPositifExists(casPositif.Id))
+                    if (!await _casPositifRepository.Any(id))
                     {
                         return NotFound();
                     }
@@ -110,7 +108,7 @@ namespace Covid_19_Tracker.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(casPositif);
+            return View(model);
         }
 
         // GET: CasPositifs/Delete/5
@@ -121,14 +119,14 @@ namespace Covid_19_Tracker.Web.Controllers
                 return NotFound();
             }
 
-            var casPositif = await _context.CasPositifs
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var casPositif = await _casPositifRepository.Get(id.Value);
             if (casPositif == null)
             {
                 return NotFound();
             }
 
-            return View(casPositif);
+            var model = casPositif.ToCasPositifViewModel();
+            return View(model);
         }
 
         // POST: CasPositifs/Delete/5
@@ -136,15 +134,8 @@ namespace Covid_19_Tracker.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var casPositif = await _context.CasPositifs.FindAsync(id);
-            _context.CasPositifs.Remove(casPositif);
-            await _context.SaveChangesAsync();
+            var casPositif = await _casPositifRepository.Delete(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool CasPositifExists(int id)
-        {
-            return _context.CasPositifs.Any(e => e.Id == id);
         }
     }
 }

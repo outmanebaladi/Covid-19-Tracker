@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Covid_19_Tracker.Entites;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -16,5 +17,6 @@ namespace Covid_19_Tracker.Persistence
         public DbSet<CasSuivi> CasSuivis { get; set; }
         public DbSet<FicheSuivi> FichesSuivi { get; set; }
         public DbSet<Personne> Personnes { get; set; }
+
     }
 }

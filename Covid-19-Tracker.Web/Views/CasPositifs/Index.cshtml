@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Covid_19_Tracker.Entites.CasPositif>
+﻿@model IEnumerable<CasPositifViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -7,23 +7,11 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Nouveau cas positif:</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Type)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date_Declaration)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date_Dernier_Contact)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre_Contacts)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Nom)
             </th>
@@ -37,7 +25,28 @@
                 @Html.DisplayNameFor(model => model.Sexe)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Region)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CodePostal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Addresse)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.NumeroTel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date_Declaration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date_Dernier_Contact)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre_Contacts)
             </th>
             <th></th>
         </tr>
@@ -45,18 +54,6 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date_Declaration)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date_Dernier_Contact)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre_Contacts)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Nom)
             </td>
@@ -70,11 +67,32 @@
                 @Html.DisplayFor(modelItem => item.Sexe)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Region)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CodePostal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Addresse)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.NumeroTel)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date_Declaration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date_Dernier_Contact)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre_Contacts)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
