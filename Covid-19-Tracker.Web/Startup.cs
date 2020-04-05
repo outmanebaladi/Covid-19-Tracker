@@ -25,7 +25,7 @@ namespace Covid_19_Tracker.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("Covid19TrackerDatabase")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<IdentityUser, IdentityRole>(
                 config => {
                     config.Password.RequiredLength = 6;

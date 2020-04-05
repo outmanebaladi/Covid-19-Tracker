@@ -3,13 +3,16 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "hostingPlanName": {
-      "value": null
+      "value": "covid19plan"
     },
     "administratorLogin": {
-      "value": null
+      "value": "outmanebaladi"
+    },
+    "administratorLoginPassword": {
+      "value": "covid19app"
     },
     "databaseName": {
-      "value": null
+      "value": "covid19tracker"
     }
   }
 }
