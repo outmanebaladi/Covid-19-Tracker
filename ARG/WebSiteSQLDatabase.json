@@ -79,7 +79,7 @@
     }
   },
   "variables": {
-    "webSiteName": "covid19tracker",
+    "webSiteName": "OutCovid19tracker",
     "sqlserverName": "[concat('sqlserver', uniqueString(resourceGroup().id))]"
   },
   "resources": [

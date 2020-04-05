@@ -16,9 +16,10 @@ namespace Covid_19_Tracker.Web.Controllers
         private readonly ICasSuiviRepository _casSuiviRepository;
         private const string ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
-        public CasPositifsController(ICasPositifRepository casPositifRepository)
+        public CasPositifsController(ICasPositifRepository casPositifRepository, ICasSuiviRepository casSuiviRepository)
         {
             _casPositifRepository = casPositifRepository;
+            _casSuiviRepository = casSuiviRepository;
         }
 
         // GET: CasPositifs
