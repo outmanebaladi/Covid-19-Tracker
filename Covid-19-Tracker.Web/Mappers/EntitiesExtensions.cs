@@ -1,9 +1,7 @@
 ﻿using Covid_19_Tracker.Entites;
+using Covid_19_Tracker.Web.Mappers.ExcelExport;
 using Covid_19_Tracker.Web.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Covid_19_Tracker.Web.Mappers
 {
@@ -69,6 +67,31 @@ namespace Covid_19_Tracker.Web.Mappers
 				models.Add(ficheSuivi.ToFicheSuiviViewModel());
 			}
 			return models;
+		}
+		public static ExcelSuivi ToExcelSuivi(this FicheSuivi ficheSuivi)
+		{
+			return new ExcelSuivi
+			{
+				Id = ficheSuivi.Id.ToString(),
+				NomPrenom = $"{ficheSuivi.CasSuivi.Nom} {ficheSuivi.CasSuivi.Nom}",
+				DateSuivi = ficheSuivi.Date,
+				Temperature_M = ficheSuivi.Temp_M,
+				Temperature_S = ficheSuivi.Temp_S,
+				Toux_M = ficheSuivi.Toux_M ? "OUI" : "NON",
+				Toux_S = ficheSuivi.Toux_S ? "OUI" : "NON",
+				Dyspnee_M = ficheSuivi.Dyspnee_M ? "OUI" : "NON",
+				Dyspnee_S = ficheSuivi.Dyspnee_S ? "OUI" : "NON",
+				MalAGorge_M = ficheSuivi.MalDeGorge_M ? "OUI" : "NON",
+				MalAGorge_S = ficheSuivi.MalDeGorge_S ? "OUI" : "NON",
+				Cephale_M = ficheSuivi.Cephalee_M ? "OUI" : "NON",
+				Cephale_S = ficheSuivi.Cephalee_S ? "OUI" : "NON",
+				Myalgi_M = ficheSuivi.Myalgie_M ? "OUI" : "NON",
+				Myalgi_S = ficheSuivi.Myalgie_S ? "OUI" : "NON",
+				Aute1_M = ficheSuivi.Autres_M,
+				Autre1_S =ficheSuivi.Autres_S,
+				Conclusion_M = ficheSuivi.Conclusion_M,
+				Conclusion_S = ficheSuivi.Conclusion_S
+			};
 		}
 	}
 }
